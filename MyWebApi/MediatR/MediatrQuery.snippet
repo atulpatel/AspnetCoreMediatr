@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>MediatRQuery</Title>
+			<Author>Atul Patel (atulpatel.mca@gmail.com)</Author>
+        </Header>
+        <Snippet>
+		  <Code Language="CSharp">
+			<![CDATA[ 
+	public class $Feature$
+    {
+        public class $Feature$Query : IRequest<$Feature$Response>
+        {
+           public int Id {get; set;}
+        }
+        public class $Feature$Response 
+        {
+           
+        }
+        public class Handler : IRequestHandler<$Feature$Query, $Feature$Response>
+        {
+            private readonly IDbConnection _dbConnection;
+
+            public Handler(IDbConnection dbConnection)
+            {
+                _dbConnection = dbConnection;
+            }
+            public async Task<$Feature$Response> Handle($Feature$Query request, CancellationToken cancellationToken)
+            {
+                string sql = @"";
+				
+                return await _dbConnection.QueryFirstOrDefaultAsync<$Feature$Response>(sql,request);                
+            }
+        }
+	}
+	]]>
+		  </Code>
+		  <Imports>
+				<Import>
+				  <Namespace>MediatR</Namespace>
+				  <Namespace>System.Threading</Namespace>
+				  <Namespace>System.Threading.Tasks</Namespace>
+				  <Namespace>Dapper</Namespace>
+				</Import>
+		  </Imports>
+		  <Declarations>
+			<Literal>
+			  <ID>Feature</ID>
+			  <ToolTip>Choose the Feature name you want.</ToolTip>
+			  <Default>Feature</Default>
+			</Literal>			
+		  </Declarations>
+		</Snippet>
+    </CodeSnippet>
+</CodeSnippets>
